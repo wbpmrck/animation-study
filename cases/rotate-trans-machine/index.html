@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>演示：旋转的翻译机</title>
+    <link rel="stylesheet" href="../../css/reset.css">
+</head>
+<body>
+
+<!--
+
+
+
+-->
+
+<style>
+    .empty-box{
+        position: relative;
+        display: inline-block;
+        left: 400px;
+        margin: 20px;
+
+        background-color: #6B6B6B;
+    }
+    .preserve{
+        transform-style:preserve-3d;
+    }
+    .expand{
+        margin: 50px;
+    }
+    .perspective-1400{
+        perspective: 1400px;
+        -moz-perspective: 1400px;
+        -webkit-perspective: 1400px;
+    }
+
+    .rotateX{
+        transform: rotate3d(1,0,0, 10deg);
+    }
+    .animation-rotate3d-0-1-0{
+        animation: rotate3d-0-1-0 3s linear infinite;
+    }
+
+
+    @keyframes rotate3d-0-1-0 {
+        0% {
+            transform: rotate3d(0,1,0, 0deg);
+        }
+        100% {
+            transform: rotate3d(0,1,0, 360deg);
+        }
+    }
+</style>
+
+
+<style>
+    .x-axis{
+        position: absolute;
+        top:50%;
+        left: 2%;
+        width: 96%;
+        height: 0px;
+        border-top: solid 1px #cccc33;
+    }
+    .x-axis:before{
+        content: "-x";
+        color: #ffe400;
+    ;
+    }
+    .x-axis:after{
+        content: "+x";
+        float: right;
+        color: #ffe400;
+    }
+    .y-axis{
+        position: absolute;
+        left:50%;
+        top:3%;
+        height: 94%;
+        border-left: 1px solid #cccc33;
+        color: #ffe400;
+    }
+
+    .y-axis:before{
+        content: "-y";
+        width: 20px;
+        color: #ffe400;
+    }
+    .y-axis:after{
+        content: "+y";
+        position: absolute;
+        left: 1px;
+        bottom: 0px;
+        width: 20px;
+        color: #ffe400;
+    }
+
+
+    .z-axis{
+        position: absolute;
+        top:50%;
+        left: 2%;
+        width: 96%;
+        height: 0px;
+        border-top: dashed 1px #cccc33;
+
+        transform: rotate(33deg);
+    }
+    .z-axis:before{
+        content: "+Z";
+        color: #ffe400;
+    ;
+    }
+    .z-axis:after{
+        content: "-z";
+        float: right;
+        color: #ffe400;
+    }
+
+    .axis-1-1-0{
+        position: absolute;
+        top:50%;
+        left: 2%;
+        width: 96%;
+        height: 0px;
+        border-top: solid 1px #fa6361;
+
+        transform: rotate(45deg);
+    }
+    .axis-1-1-0:before{
+        content: "(1,1,0)";
+        position: relative;
+        left: -20px;
+        color: #fa6361;
+
+        font-size: 12px;
+    ;
+    }
+    .axis-1-1-0:after{
+        content: "(1,1,0)";
+        position: relative;
+        right: -20px;
+        float: right;
+        color: #fa6361;
+
+        font-size: 12px;
+    }
+
+    .axis-0-1-1{
+        position: absolute;
+        top:50%;
+        left: 2%;
+        width: 96%;
+        height: 0px;
+        border-top: dashed 1px #fa6361;
+
+        transform: rotate(45deg);
+    }
+    .axis-0-1-1:before{
+        content: "(0,1,1)";
+        position: relative;
+        left: -20px;
+        color: #fa6361;
+
+        font-size: 12px;
+    ;
+    }
+    .axis-0-1-1:after{
+        content: "(0,1,1)";
+        position: relative;
+        right: -20px;
+        float: right;
+        color: #fa6361;
+
+        font-size: 12px;
+    }
+
+    .axis-0-1-0{
+        position: absolute;
+        top:50%;
+        left: 2%;
+        width: 96%;
+        height: 0px;
+        border-top: dashed 1px #fa6361;
+
+        transform: rotate(90deg);
+    }
+    .axis-0-1-0:before{
+        content: "(0,1,0)";
+        position: relative;
+        left: -20px;
+        color: #fa6361;
+
+        font-size: 12px;
+    ;
+    }
+    .axis-0-1-0:after{
+        content: "(0,1,0)";
+        position: relative;
+        right: -20px;
+        float: right;
+        color: #fa6361;
+
+        font-size: 12px;
+    }
+
+</style>
+
+<style>
+    .flat{
+        transform-style: flat;
+    }
+    .preserve{
+        transform-style:preserve-3d;
+    }
+    .backface-hidden{
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden;
+        -ms-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+</style>
+
+
+
+<style>
+    .cube{
+        height: 100px;
+        position: relative;
+        width: 100px;
+        /*transform: translateZ(-100px);*/
+        transform-style: preserve-3d;
+    }
+    .side {
+        /*background: rgba(45, 179, 74, .3);*/
+        /*border: 2px solid #2db34a;*/
+        /*height: 96px;*/
+        /*width: 96px;*/
+        position: absolute;
+
+        /*color: #a133ff;*/
+        /*text-align: center;*/
+        /*font-size: 20px;*/
+        /*font-weight: bold;*/
+        /*line-height: 100px;*/
+        /*vertical-align: middle;*/
+
+    }
+    /*把div默认的平面当做正面*/
+    .front {
+        transform: translate3d(0px,0px,24px);
+        width: 208px;
+        height:584px;
+        background-image: url("./image/front.png");
+        background-size: cover;
+    }
+    /*背面离观察者远离100像素(透入屏幕内)(因为立方体边长100px)，旋转180度(反面)*/
+    .back {
+        transform: translate3d(0px,0px,-24px) rotateY(180deg);
+        width: 208px;
+        height:584px;
+        background-image: url("./image/back.png");
+        background-size: cover;
+    }
+    /*左面，向左偏移50px,向屏幕内远离50px(rotate的中心默认是元素的中间)*/
+    .left {
+        transform: translate3d(-23px,0px,0px) rotateY(-90deg);
+        width: 46px;
+        height:584px;
+        background-image: url("./image/left.png");
+        background-size: cover;
+    }
+    /*右面，向右偏移50px,向屏幕内远离50px(rotate的中心默认是元素的中间)*/
+    .right {
+        transform: translate3d(184px,0px,0px)  rotateY(90deg);
+        width: 46px;
+        height:584px;
+        background-image: url("./image/right.png");
+        background-size: cover;
+    }
+    /*上面，向上偏移50px,旋转90度，向屏幕内远离50px*/
+    .top {
+        transform: translate3d(0px,-24px,0px)  rotateX(90deg);
+        width: 208px;
+        height:49px;
+        background-image: url("./image/top.png");
+        background-size: cover;
+    }
+    /*上面，向下偏移50px,旋转90度，向屏幕内远离50px*/
+    .bottom {
+        transform: translate3d(0px,560px,0px)  rotateX(-90deg);
+        width: 208px;
+        height:49px;
+        background-image: url("./image/bottom.png");
+        background-size: cover;
+    }
+
+</style>
+
+
+        <div class="empty-box perspective-1400">
+
+            <div class="x-axis"></div>
+            <div class="y-axis"></div>
+            <div class="z-axis"></div>
+            <div class="axis-0-1-0"></div>
+
+
+            <div class="animation-rotate3d-0-1-0 preserve">
+
+                <div class="cube rotateX expand">
+                <!--<div class="cube expand">-->
+                    <div class="side  backface-hidden  front">front</div>
+                    <div class="side  backface-hidden  back">back</div>
+                    <div class="side  backface-hidden  left">left</div>
+                    <div class="side  backface-hidden  right">right</div>
+                    <div class="side  backface-hidden  top">top</div>
+                    <div class="side  backface-hidden  bottom">bottom</div>
+                </div>
+            </div>
+
+        </div>
+
+
+</div>
+
+</body>
+</html>
