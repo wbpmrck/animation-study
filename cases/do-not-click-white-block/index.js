@@ -1,25 +1,13 @@
-// var lg = log4web.newLogger();
-// var ui = window['log4web-ui-mobile'];
-
-// lg.config({
-//   level: log4web.LogLevel.TRACE,
-//   // level: log4web.LogLevel.ERROR,
-//   defaultStore: {
-//     enable: true,
-//   },
-//   defaultFanner: {
-//     enable: false
-//   },
-//   'log4web-ui-mobile': {}
-// })
-// lg.use(ui.Core); //使用默认的输出插件(console/alert)
-
-// lg.setSpinBackColor('red');
+// var lg = log4web.newLogger(); var ui = window['log4web-ui-mobile'];
+// lg.config({   level: log4web.LogLevel.TRACE,   // level:
+// log4web.LogLevel.ERROR,   defaultStore: {     enable: true,   },
+// defaultFanner: {     enable: false   },   'log4web-ui-mobile': {} })
+// lg.use(ui.Core); //使用默认的输出插件(console/alert) lg.setSpinBackColor('red');
 // lg.showFloatSpin();
 
 var resources = {
   start: undefined,
-  score: undefined,
+  score: undefined
 }
 
 function loadImg(url, cb) {
@@ -35,8 +23,8 @@ function loadImg(url, cb) {
 
 //这里也可以修改成整体项目使用的资源加载器来实现预加载。这里简单写一下
 function loadRes(cb) {
-  resources.score = loadImg('/img/score-bg.png', () => {
-    resources.start = loadImg('/img/start.png', () => {
+  resources.score = loadImg('./img/score-bg.png', () => {
+    resources.start = loadImg('./img/start.png', () => {
       cb && cb();
     })
   })
@@ -44,10 +32,9 @@ function loadRes(cb) {
 
 var _requestAnimationFrame = window.requestAnimationFrame;
 
-
-
 var config = {
-  // clock: 1000, // 控制动画帧率。如果是undefined,默认requestAnimationFrame，否则使用计时器(duration=clock)
+  // clock: 1000, //
+  // 控制动画帧率。如果是undefined,默认requestAnimationFrame，否则使用计时器(duration=clock)
   canvas: {
     width: 0,
     height: 0,
@@ -57,155 +44,150 @@ var config = {
     let levelConfig = config
       .level
       .filter((l) => {
-        return (line >= (l.from == undefined ?
-          0 :
-          l.from)) && (line <= (l.to == undefined ?
-          Infinity :
-          l.to))
+        return (line >= (l.from == undefined
+          ? 0
+          : l.from)) && (line <= (l.to == undefined
+          ? Infinity
+          : l.to))
       })[0];
     return levelConfig;
   },
   addGradients: false, //此开关控制是否在画面上绘制渐变的装饰性圆点
 
   //如果开关打开，下面配置的渐变圆点会绘制
-  gradients: [{
+  gradients: [
+    {
       x0: 310,
       y0: 160,
       r0: 10,
       x1: 310,
       y1: 160,
       r1: 0,
-      shadowBlur: 40,
-    },
-    {
+      shadowBlur: 40
+    }, {
       x0: 210,
       y0: 180,
       r0: 30,
       x1: 210,
       y1: 180,
       r1: 0,
-      shadowBlur: 10,
-    },
-    {
+      shadowBlur: 10
+    }, {
       x0: 230,
       y0: 270,
       r0: 25,
       x1: 230,
       y1: 270,
       r1: 0,
-      shadowBlur: 10,
-    },
-    {
+      shadowBlur: 10
+    }, {
       x0: 45,
       y0: 370,
       r0: 110,
       x1: 45,
       y1: 370,
       r1: 0,
-      shadowBlur: 90,
-    },
-    {
+      shadowBlur: 90
+    }, {
       x0: 330,
       y0: 360,
       r0: 20,
       x1: 330,
       y1: 360,
       r1: 0,
-      shadowBlur: 10,
-    },
-    {
+      shadowBlur: 10
+    }, {
       x0: 320,
       y0: 380,
       r0: 16,
       x1: 320,
       y1: 380,
       r1: 0,
-      shadowBlur: 10,
-    },
-    {
+      shadowBlur: 10
+    }, {
       x0: 100,
       y0: 420,
       r0: 26,
       x1: 100,
       y1: 420,
       r1: 0,
-      shadowBlur: 10,
-    },
-    {
+      shadowBlur: 10
+    }, {
       x0: 250,
       y0: 450,
       r0: 46,
       x1: 250,
       y1: 450,
       r1: 0,
-      shadowBlur: 10,
-    },
-    {
+      shadowBlur: 10
+    }, {
       x0: 270,
       y0: 430,
       r0: 18,
       x1: 270,
       y1: 430,
       r1: 0,
-      shadowBlur: 10,
-    },
+      shadowBlur: 10
+    }
   ],
   lines: 5, //全屏幕高度可以完整渲染多少行格子
   lineHeight: undefined, //一行高度
-  level: [{
-    from: 0,
-    to: 1,
-    block: 4, // 备选块数
-    target: 1, //需要点击的块数
-    speed: 550 //多少时间滚动完一行 
-  }, {
-    from: 2,
-    to: 5,
-    block: 4,
-    target: 1,
-    speed: 500
-  }, {
-    from: 6,
-    to: 15,
-    block: 4,
-    target: 2,
-    speed: 450
-  }, {
-    from: 16,
-    to: 30,
-    block: 4,
-    target: 2,
-    speed: 400
-  }, {
-    from: 31,
-    to: 50,
-    block: 4,
-    target: 2,
-    speed: 360
-  }, {
-    from: 51,
-    to: 80,
-    block: 4,
-    target: 2,
-    speed: 320
-  }, {
-    from: 81,
-    to: 200,
-    block: 4,
-    target: 3,
-    speed: 300
-  }, {
-    from: 201,
-    to: 300,
-    block: 4,
-    target: 3,
-    speed: 280
-  }, {
-    from: 301,
-    block: 4,
-    target: 3,
-    speed: 250
-  }]
+  level: [
+    {
+      from: 0,
+      to: 1,
+      block: 4, // 备选块数
+      target: 1, //需要点击的块数
+      speed: 550 //多少时间滚动完一行
+    }, {
+      from: 2,
+      to: 5,
+      block: 4,
+      target: 1,
+      speed: 500
+    }, {
+      from: 6,
+      to: 15,
+      block: 4,
+      target: 2,
+      speed: 450
+    }, {
+      from: 16,
+      to: 30,
+      block: 4,
+      target: 2,
+      speed: 400
+    }, {
+      from: 31,
+      to: 50,
+      block: 4,
+      target: 2,
+      speed: 360
+    }, {
+      from: 51,
+      to: 80,
+      block: 4,
+      target: 2,
+      speed: 320
+    }, {
+      from: 81,
+      to: 200,
+      block: 4,
+      target: 3,
+      speed: 300
+    }, {
+      from: 201,
+      to: 300,
+      block: 4,
+      target: 3,
+      speed: 280
+    }, {
+      from: 301,
+      block: 4,
+      target: 3,
+      speed: 250
+    }
+  ]
 }
 
 if (config.clock) {
@@ -266,18 +248,16 @@ function getRandomIntN(min, max, count) {
 
 var canvasObject = document.getElementById('root');
 // var ctx = canvasObject.getContext('2d');
-var ctx = canvasObject.getContext('2d', {
-  alpha: false
-});
+var ctx = canvasObject.getContext('2d', {alpha: false});
 
 /**
  * 定义一个矩形块。这个对象只用于在内存中表示游戏数据
- * @param {*} x 
- * @param {*} y 
- * @param {*} w 
- * @param {*} h 
- * @param {Boolean} isBlack 
- * @param {Number} lineNum 
+ * @param {*} x
+ * @param {*} y
+ * @param {*} w
+ * @param {*} h
+ * @param {Boolean} isBlack
+ * @param {Number} lineNum
  */
 function Block(x, y, w, h, isBlack, lineNum) {
   this.lineNum = lineNum;
@@ -304,7 +284,8 @@ Block.prototype.containPoint = function (x, y) {
  */
 Block.prototype.tryKnock = function (x, y) {
 
-  // console.log(`knock:[${x},${y},this:[${this.x},${this.y},${this.w},${this.h}]`)
+  // console.log(`knock:[${x},${y},this:[${this.x},${this.y},${this.w},${this.h}]`
+  // )
   let contain = this.containPoint(x, y);
   if (contain) {
     this.knocked = true;
@@ -408,28 +389,26 @@ Block.prototype.visibleRect = function () {
 
 /**
  * 获取指定canvas位置的像素颜色
- * @param {*} ctx 
- * @param {*} x 
- * @param {*} y 
+ * @param {*} ctx
+ * @param {*} x
+ * @param {*} y
  */
 function getPosColor(ctx, x, y) {
   var pixel = ctx.getImageData(x, y, 1, 1);
   var data = pixel.data;
-  var rgba = 'rgba(' + data[0] + ',' + data[1] +
-    ',' + data[2] + ',' + (data[3] / 255) + ')';
+  var rgba = 'rgba(' + data[0] + ',' + data[1] + ',' + data[2] + ',' + (data[3] / 255) + ')';
   return rgba;
 }
 /**
  * 部分HDPI(DPR>1)的机器上，canvas绘制图片会模糊，因为DPR的原因，这个函数可以把画布的绘制大小放大，展示的时候通过style缩放回去
- * @param {HTMLCanvasElement} canvas 
+ * @param {HTMLCanvasElement} canvas
  */
 function setupHDPICanvas(canvas) {
   // Get the device pixel ratio, falling back to 1.
   var dpr = window.devicePixelRatio || 1;
   // Get the size of the canvas in CSS pixels.
   var rect = canvas.getBoundingClientRect();
-  // Give the canvas pixel dimensions of their CSS
-  // size * the device pixel ratio.
+  // Give the canvas pixel dimensions of their CSS size * the device pixel ratio.
   canvas.width = rect.width * dpr;
   canvas.height = rect.height * dpr;
 
@@ -476,10 +455,7 @@ function handleClick(e) {
 
   if (data.state !== STATE.END) {
 
-    let {
-      clientX,
-      clientY
-    } = e.touches[0];
+    let {clientX, clientY} = e.touches[0];
     clientX = config.canvas.useDpr * clientX;
     clientY = config.canvas.useDpr * clientY;
     data.walkBlock((blk) => {
@@ -639,19 +615,23 @@ function onPaint(ctx, state) {
   //画点缀的渐变圆
   if (config.addGradients) {
 
-    config.gradients.forEach((circle) => {
-      var gradient = ctx.createRadialGradient(circle.x0 * config.canvas.useDpr, circle.y0 * config.canvas.useDpr, circle.r0 * config.canvas.useDpr, circle.x1 * config.canvas.useDpr, circle.y1 * config.canvas.useDpr, circle.r1 * config.canvas.useDpr);
-      var targetColor = getPosColor(ctx, circle.x0 * config.canvas.useDpr, circle.y0 * config.canvas.useDpr);
-      gradient.addColorStop(0, targetColor);
-      gradient.addColorStop(1, "#efe");
-      ctx.fillStyle = gradient;
-      ctx.shadowColor = circle.shadowBlur * config.canvas.useDpr;
-      ctx.shadowBlur = 10;
-      ctx.beginPath();
-      ctx.arc(circle.x0 * config.canvas.useDpr, circle.y0 * config.canvas.useDpr, circle.r0 * config.canvas.useDpr, 0, 2 * Math.PI);
-      ctx.fill();
-      // ctx.fillRect((circle.x0 - circle.r0) * config.canvas.useDpr, (circle.y0 - circle.r0) * config.canvas.useDpr, circle.r0 * 2 * config.canvas.useDpr, circle.r0 * 2 * config.canvas.useDpr);
-    })
+    config
+      .gradients
+      .forEach((circle) => {
+        var gradient = ctx.createRadialGradient(circle.x0 * config.canvas.useDpr, circle.y0 * config.canvas.useDpr, circle.r0 * config.canvas.useDpr, circle.x1 * config.canvas.useDpr, circle.y1 * config.canvas.useDpr, circle.r1 * config.canvas.useDpr);
+        var targetColor = getPosColor(ctx, circle.x0 * config.canvas.useDpr, circle.y0 * config.canvas.useDpr);
+        gradient.addColorStop(0, targetColor);
+        gradient.addColorStop(1, "#efe");
+        ctx.fillStyle = gradient;
+        ctx.shadowColor = circle.shadowBlur * config.canvas.useDpr;
+        ctx.shadowBlur = 10;
+        ctx.beginPath();
+        ctx.arc(circle.x0 * config.canvas.useDpr, circle.y0 * config.canvas.useDpr, circle.r0 * config.canvas.useDpr, 0, 2 * Math.PI);
+        ctx.fill();
+        // ctx.fillRect((circle.x0 - circle.r0) * config.canvas.useDpr, (circle.y0 -
+        // circle.r0) * config.canvas.useDpr, circle.r0 * 2 * config.canvas.useDpr,
+        // circle.r0 * 2 * config.canvas.useDpr);
+      })
   }
 
   //画纵向分割线
@@ -668,23 +648,21 @@ function onPaint(ctx, state) {
   ctx.moveTo(config.canvas.width / 4 * 3, 0);
   ctx.lineTo(config.canvas.width / 4 * 3, config.canvas.height);
 
-
   ctx.stroke();
 
-  //画分数-背景
-  // var scoreGradient = ctx.createLinearGradient(config.canvas.width / 4, 0, config.canvas.width / 4 * 3, 0);
-  // scoreGradient.addColorStop(0, '#6E85F9');
-  // scoreGradient.addColorStop(0.5, '#301B72');
-  // scoreGradient.addColorStop(1, '#6E85F9');
-  // ctx.fillStyle = scoreGradient;
-  // ctx.fillRect(config.canvas.width / 4, 10, config.canvas.width / 2, 36);
+  // 画分数-背景 var scoreGradient = ctx.createLinearGradient(config.canvas.width / 4,
+  // 0, config.canvas.width / 4 * 3, 0); scoreGradient.addColorStop(0, '#6E85F9');
+  // scoreGradient.addColorStop(0.5, '#301B72'); scoreGradient.addColorStop(1,
+  // '#6E85F9'); ctx.fillStyle = scoreGradient; ctx.fillRect(config.canvas.width /
+  // 4, 10, config.canvas.width / 2, 36);
   ctx.drawImage(resources.score, config.canvas.width / 4, 10 * config.canvas.useDpr, config.canvas.width / 2, 33 * config.canvas.useDpr);
 
   //画分数-分数
   ctx.fillStyle = "#FAD35F";
-  ctx.font = `bold ${22*config.canvas.useDpr}px serif`;
+  ctx.font = `bold ${ 22 * config.canvas.useDpr}px serif`;
   ctx.textAlign = "center";
-  // ctx.fillText(data.score, config.canvas.width / 2, (10 + 33 / 2) * config.canvas.useDpr);
+  // ctx.fillText(data.score, config.canvas.width / 2, (10 + 33 / 2) *
+  // config.canvas.useDpr);
   ctx.fillText(data.score, config.canvas.width / 2, (10 + 33 - (33 - 22) / 2) * config.canvas.useDpr - 5);
 
 }
@@ -693,6 +671,5 @@ function onPaint(ctx, state) {
 loadRes(() => {
   init();
 })
-
 
 // start();
