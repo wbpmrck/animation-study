@@ -12,4 +12,4 @@
 
 ### 游戏类
 
-- [别踩白块游戏](https://wbpmrck.github.io/animation-study/cases/do-not-click-white-block/index.html)
+- [别踩白块游戏(使用手机打开或者开启F12模拟移动端)](https://wbpmrck.github.io/animation-study/cases/do-not-click-white-block/index.html)
