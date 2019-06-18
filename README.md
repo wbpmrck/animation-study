@@ -10,4 +10,6 @@
 - [翻译机的翻转](./cases/rotate-trans-machine)
 
 
-### 综合类
+### 游戏类
+
+- [别踩白块游戏]([./cases/rotate-trans-machine](https://wbpmrck.github.io/animation-study/cases/do-not-click-white-block/index.html))
