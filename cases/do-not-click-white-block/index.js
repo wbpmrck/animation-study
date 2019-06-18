@@ -23,8 +23,12 @@ function loadImg(url, cb) {
 
 //这里也可以修改成整体项目使用的资源加载器来实现预加载。这里简单写一下
 function loadRes(cb) {
-  resources.score = loadImg('./img/score-bg.png', () => {
-    resources.start = loadImg('./img/start.png', () => {
+  resources.score = loadImg('https://wbpmrck.github.io/animation-study/cases/do-not-click-white-block/img/sco' +
+      're-bg.png',
+  () => {
+    resources.start = loadImg('https://wbpmrck.github.io/animation-study/cases/do-not-click-white-block/img/sta' +
+        'rt.png',
+    () => {
       cb && cb();
     })
   })
@@ -651,10 +655,10 @@ function onPaint(ctx, state) {
   ctx.stroke();
 
   // 画分数-背景 var scoreGradient = ctx.createLinearGradient(config.canvas.width / 4,
-  // 0, config.canvas.width / 4 * 3, 0); scoreGradient.addColorStop(0, '#6E85F9');
-  // scoreGradient.addColorStop(0.5, '#301B72'); scoreGradient.addColorStop(1,
-  // '#6E85F9'); ctx.fillStyle = scoreGradient; ctx.fillRect(config.canvas.width /
-  // 4, 10, config.canvas.width / 2, 36);
+  // 0, config.canvas.width / 4 * 3, 0); scoreGradient.addColorStop(0,
+  // '#6E85F9'); scoreGradient.addColorStop(0.5, '#301B72');
+  // scoreGradient.addColorStop(1, '#6E85F9'); ctx.fillStyle = scoreGradient;
+  // ctx.fillRect(config.canvas.width / 4, 10, config.canvas.width / 2, 36);
   ctx.drawImage(resources.score, config.canvas.width / 4, 10 * config.canvas.useDpr, config.canvas.width / 2, 33 * config.canvas.useDpr);
 
   //画分数-分数
