@@ -12,4 +12,4 @@
 
 ### 游戏类
 
-- [别踩白块游戏]([./cases/rotate-trans-machine](https://wbpmrck.github.io/animation-study/cases/do-not-click-white-block/index.html))
+- [别踩白块游戏](https://wbpmrck.github.io/animation-study/cases/do-not-click-white-block/index.html)
